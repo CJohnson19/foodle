@@ -5,20 +5,21 @@
 
 ## Features to Implement
 
-- [ ] Camera Integration
+- [ ] Camera Integration (@BraunFranklin)
   - [ ] Request access to camera
   - [ ] Mock scan results
-- [ ] "Cook Now" page
-- [ ] Preferences Page
-- [ ] Pantry Page
+- [ ] "Cook Now" page (@ageekwall)
+- [ ] Search page (@CJohnson19)
+- [ ] Preferences Page (@dmethi)
+- [ ] Pantry Page (@dmethi)
 - [ ] Shared Elements
-  - [ ] Ingredient List View
+  - [ ] Ingredient List View (@SonaliMucherla)
     - [ ] Edit Button
     - [ ] Add Button
-  - [ ] Recipe Card View
-  - [ ] Recipe Page View
-  - [ ] Adjusting Ingredients
-  - [ ] Tab Bar
-  - [ ] Search / Filter Bar
+  - [ ] Recipe Card View (@bhaargav006 Minimized card on cook now page)
+  - [ ] Recipe Page View (@bhaargav006 Maximized card on cook now page)
+  - [ ] Adjusting Ingredients (@CJohnson19)
+  - [ ] Tab Bar (@SonaliMucherla)
+  - [ ] Search / Filter Bar (@CJohnson19)
     - [ ] Filter Options
     - [ ] Search Bar
