@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Cook Now" />
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Search" />
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@drawable/ic_baseline_add_circle_24"
+        android:title="Add ingredients" />
+    <item
+        android:id="@+id/nav_pantry"
+        android:icon="@drawable/ic_baseline_food_bank_24"
+        android:title="Pantry" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Preferences" />
+
+</menu>
