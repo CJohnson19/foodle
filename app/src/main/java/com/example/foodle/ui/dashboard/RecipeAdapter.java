@@ -38,6 +38,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.layout_recipe_card, null);
+        System.out.println("Opening View Holder");
         return new RecipeViewHolder(view);
     }
 
@@ -51,6 +52,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         holder.textViewDuration.setText(String.valueOf(recipe.getDuration()));
         holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(recipe.getImage()));
 
+        System.out.println("Displaying view Card");
     }
 
     @Override
