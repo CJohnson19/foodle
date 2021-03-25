@@ -1,9 +1,12 @@
 package com.example.foodle.ui.dashboard;
 
+import android.app.MediaRouteButton;
 import android.content.Context;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +24,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
      */
     private Context mCtx;
     private List<Recipe> recipeList;
+    int mExpandedPosition = -1;
+
 
     public RecipeAdapter(Context mCtx, List<Recipe> recipeList) {
         this.mCtx = mCtx;
@@ -46,12 +51,23 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     public void onBindViewHolder(RecipeViewHolder holder, int position) {
         //getting the product of the specified position
         Recipe recipe = recipeList.get(position);
-
         holder.textViewTitle.setText(recipe.getTitle());
         holder.textViewShortDesc.setText(recipe.getDescription());
         holder.textViewDuration.setText(String.valueOf(recipe.getDuration()));
         holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(recipe.getImage()));
+        final boolean isExpanded = position==mExpandedPosition;
+        holder.details.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        holder.button.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        holder.details.setText(recipe.getDetails());
+        holder.itemView.setActivated(isExpanded);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                mExpandedPosition = isExpanded ? -1:position;
+                notifyItemChanged(position);
+            }
+        });
         System.out.println("Displaying view Card");
     }
 
@@ -67,6 +83,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         TextView textViewTitle, textViewShortDesc, textViewDuration;
         ImageView imageView;
+        TextView details;
+        Button button;
 
         public RecipeViewHolder(View itemView) {
             super(itemView);
@@ -75,6 +93,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             textViewShortDesc = itemView.findViewById(R.id.textViewDescription);
             textViewDuration = itemView.findViewById(R.id.textViewDuration);
             imageView = itemView.findViewById(R.id.imageView);
+            details = itemView.findViewById(R.id.textDetails);
+            button = itemView.findViewById(R.id.button2);
         }
     }
 }

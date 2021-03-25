@@ -1,5 +1,7 @@
 package com.example.foodle.ui.dashboard;
 
+import android.widget.Button;
+
 public class Recipe {
     /***
      * Attributes
@@ -15,13 +17,15 @@ public class Recipe {
     private String description;
     private int duration;
     private int image;
+    private String details;
 
-    public Recipe(int id, String title, String description, int duration, int image) {
+    public Recipe(int id, String title, String description, int duration, int image, String details) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.duration = duration;
         this.image = image;
+        this.details = details;
     }
 
     public int getId() {
@@ -43,4 +47,6 @@ public class Recipe {
     public int getImage() {
         return image;
     }
+
+    public String getDetails() { return details; }
 }

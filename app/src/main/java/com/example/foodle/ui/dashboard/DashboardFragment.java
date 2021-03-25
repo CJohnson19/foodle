@@ -62,17 +62,17 @@ public class DashboardFragment extends Fragment {
      */
     private List<Recipe> populateRecipes() {
         ArrayList<Recipe> recipeList = new ArrayList<>();
-        recipeList.add(new Recipe(1,
-                "Authentic Mexican Chicken Soft Tacos",
-                "One of the best authentic mexican recipes out there!",
-                25,
-                R.drawable.tacos));
-
-        recipeList.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
-                45,
-                R.drawable.pizza));
+//        recipeList.add(new Recipe(1,
+//                "Authentic Mexican Chicken Soft Tacos",
+//                "One of the best authentic mexican recipes out there!",
+//                25,
+//                R.drawable.tacos));
+//
+//        recipeList.add(new Recipe(1,
+//                "New York Neapolitan Pizza",
+//                "Top Chef approved mouthwatering recipe",
+//                45,
+//                R.drawable.pizza));
         return recipeList;
     }
 }

@@ -53,33 +53,39 @@ public class HomeFragment extends Fragment {
                 "Authentic Mexican Chicken Soft Tacos",
                 "One of the best authentic mexican recipes out there!",
                 25,
-                R.drawable.tacos));
+                R.drawable.tacos,
+                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
 
         recipeList.add(new Recipe(1,
                 "New York Neapolitan Pizza",
                 "Top Chef approved mouthwatering recipe",
                 45,
-                R.drawable.pizza));
+                R.drawable.pizza,
+                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n"));
         recipeList.add(new Recipe(1,
                 "New York Neapolitan Pizza",
                 "Top Chef approved mouthwatering recipe",
                 45,
-                R.drawable.pizza));
+                R.drawable.pizza,
+                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
         recipeList.add(new Recipe(1,
                 "New York Neapolitan Pizza",
                 "Top Chef approved mouthwatering recipe",
                 45,
-                R.drawable.pizza));
+                R.drawable.pizza,
+                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
         recipeList.add(new Recipe(1,
                 "New York Neapolitan Pizza",
                 "Top Chef approved mouthwatering recipe",
                 45,
-                R.drawable.pizza));
+                R.drawable.pizza,
+                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
         recipeList.add(new Recipe(1,
                 "New York Neapolitan Pizza",
                 "Top Chef approved mouthwatering recipe",
                 45,
-                R.drawable.pizza));
+                R.drawable.pizza,
+                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
         return recipeList;
     }
 }
