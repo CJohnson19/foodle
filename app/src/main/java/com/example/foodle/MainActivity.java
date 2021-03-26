@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFrag = new SearchFragment();
                             break;
                         case R.id.nav_add:
-                            selectedFrag = new AddFragment();
+                            selectedFrag = new AddIngredientFragment();
                             break;
                         case R.id.nav_pantry:
                             selectedFrag = new PantryFragment();
