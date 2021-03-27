@@ -23,8 +23,8 @@ import java.util.List;
 import kotlin.NotImplementedError;
 
 public class SearchActivity extends AppCompatActivity {
-    public static String CATEGORY = "CATEGORY";
-    public static String HAVE = "HAVE";
+    public final static String CATEGORY = "CATEGORY";
+    public final static String HAVE = "HAVE";
     RecyclerView recyclerView;
     List<FilterOption> filterOptionList;
     FilterCategory category = FilterCategory.RECIPES;
