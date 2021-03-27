@@ -4,9 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 
+import com.example.foodle.ui.AddMethodFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
                             selectedFrag = new SearchFragment();
                             break;
                         case R.id.nav_add:
-                            selectedFrag = new AddIngredientFragment();
+                            //dispatchTakePictureIntent();
+                            selectedFrag = new AddMethodFragment();
                             break;
                         case R.id.nav_pantry:
                             selectedFrag = new PantryFragment();
@@ -52,4 +57,5 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
 }

@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,8 +41,23 @@ public class AddIngredientFragment extends Fragment {
         IngredientAdapter ingredientAdapter = new IngredientAdapter(getContext(), ingredientList);
         recyclerView.setAdapter(ingredientAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        final Button add = root.findViewById(R.id.cnfrm_ing);
+        final Button cancel = root.findViewById(R.id.dny_ing);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new PantryFragment());
+            }
+        });
 
         return root;
+    }
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     /***
