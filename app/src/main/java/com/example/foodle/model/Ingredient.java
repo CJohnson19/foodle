@@ -1,8 +1,8 @@
-package com.example.foodle;
+package com.example.foodle.model;
 
 import android.widget.Button;
 
-public class Ingredient {
+public class Ingredient implements Filterable {
     /***
      * Attributes
      *

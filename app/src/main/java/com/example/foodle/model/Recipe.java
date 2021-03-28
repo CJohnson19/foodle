@@ -1,8 +1,8 @@
-package com.example.foodle.ui.dashboard;
+package com.example.foodle.model;
 
 import android.widget.Button;
 
-public class Recipe {
+public class Recipe implements Filterable {
     /***
      * Attributes
      *
