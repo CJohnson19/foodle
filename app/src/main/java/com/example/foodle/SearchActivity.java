@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.SearchManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,14 +23,11 @@ import com.example.foodle.model.RecipeAdapter;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import kotlin.NotImplementedError;
 
 public class SearchActivity extends AppCompatActivity {
     /**
@@ -302,6 +298,11 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Adds searchview back to the app bar
+     * @param menu the toolbar
+     * @return boolean representing success
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -316,11 +317,23 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setSubmitButtonEnabled(false);
         searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            /**
+             * Override the default {@link SearchView} behavior on submit.
+             * Will now do nothing, as we will update on change
+             * @param query text to search
+             * @return true to signal we have overridden this method
+             */
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return true;
             }
 
+            /**
+             * Overrides the default {@link SearchView} behavior when the text changes.
+             * Will now perform another search when change is detected.
+             * @param newText text to search.
+             * @return true ot signal we have overridden this method.
+             */
             @Override
             public boolean onQueryTextChange(String newText) {
                 performSearch(newText);

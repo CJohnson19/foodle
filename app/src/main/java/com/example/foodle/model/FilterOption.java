@@ -14,7 +14,11 @@ import java.util.function.Predicate;
 
 /**
  * FilterOption represents a possible option to filter by in a search.
- * This can be a Recipe or Ingredient specification.
+ * This can be a {@link Recipe} or {@link Ingredient} specification.
+ *
+ * @see Recipe
+ * @see Ingredient
+ * @see Filterable
  */
 public class FilterOption<T extends Filterable> {
     /**
