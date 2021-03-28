@@ -8,9 +8,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodle.R;
+import com.example.foodle.ui.EditIngredientFragment;
 
 import java.util.List;
 
@@ -21,13 +25,15 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
      * RecipeList -> Database of all the recipes
      */
     private Context mCtx;
+    private FragmentManager fragmentManager;
     private List<Ingredient> ingredientList;
     int mExpandedPosition = -1;
 
 
-    public IngredientAdapter(Context mCtx, List<Ingredient> ingredientList) {
+    public IngredientAdapter(Context mCtx, List<Ingredient> ingredientList, FragmentManager fragmentManager) {
         this.mCtx = mCtx;
         this.ingredientList = ingredientList;
+        this.fragmentManager = fragmentManager;
     }
 
     /***
@@ -56,6 +62,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
         final boolean isExpanded = position==mExpandedPosition;
         holder.details.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         holder.button.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        holder.editButton.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         holder.details.setText(ingredient.getDetails());
         holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +89,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
         TextView textViewTitle, textViewShortDesc, textViewDuration;
         ImageView imageView;
         TextView details;
-        Button button;
+        Button button, editButton;
 
         public IngredientViewHolder(View itemView) {
             super(itemView);
@@ -93,6 +100,11 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
             imageView = itemView.findViewById(R.id.imageView);
             details = itemView.findViewById(R.id.textDetails);
             button = itemView.findViewById(R.id.button2);
+            editButton = itemView.findViewById(R.id.editButton);
+            editButton.setOnClickListener(v -> {
+                DialogFragment editFragment = new EditIngredientFragment();
+                editFragment.show(fragmentManager, "edit");
+            });
         }
     }
 }
