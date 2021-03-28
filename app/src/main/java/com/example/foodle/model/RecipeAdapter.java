@@ -1,8 +1,6 @@
-package com.example.foodle;
+package com.example.foodle.model;
 
-import android.app.MediaRouteButton;
 import android.content.Context;
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +14,20 @@ import com.example.foodle.R;
 
 import java.util.List;
 
-public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.IngredientViewHolder>{
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>{
 
     /***
      * mCtx -> Context for the layout
      * RecipeList -> Database of all the recipes
      */
     private Context mCtx;
-    private List<Ingredient> ingredientList;
+    private List<Recipe> recipeList;
     int mExpandedPosition = -1;
 
 
-    public IngredientAdapter(Context mCtx, List<Ingredient> ingredientList) {
+    public RecipeAdapter(Context mCtx, List<Recipe> recipeList) {
         this.mCtx = mCtx;
-        this.ingredientList = ingredientList;
+        this.recipeList = recipeList;
     }
 
     /***
@@ -39,26 +37,26 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
      */
 
     @Override
-    public IngredientViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.layout_ingredients, null);
+        View view = inflater.inflate(R.layout.layout_recipe_card, null);
         System.out.println("Opening View Holder");
-        return new IngredientViewHolder(view);
+        return new RecipeViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(IngredientViewHolder holder, int position) {
+    public void onBindViewHolder(RecipeViewHolder holder, int position) {
         //getting the product of the specified position
-        Ingredient ingredient = ingredientList.get(position);
-        holder.textViewTitle.setText(ingredient.getTitle());
-        holder.textViewShortDesc.setText(ingredient.getDescription());
-        holder.textViewDuration.setText(String.valueOf(ingredient.getDuration()));
-        holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(ingredient.getImage()));
+        Recipe recipe = recipeList.get(position);
+        holder.textViewTitle.setText(recipe.getTitle());
+        holder.textViewShortDesc.setText(recipe.getDescription());
+        holder.textViewDuration.setText(String.valueOf(recipe.getDuration()));
+        holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(recipe.getImage()));
         final boolean isExpanded = position==mExpandedPosition;
         holder.details.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         holder.button.setVisibility(isExpanded?View.VISIBLE:View.GONE);
-        holder.details.setText(ingredient.getDetails());
+        holder.details.setText(recipe.getDetails());
         holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,20 +71,20 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
 
     @Override
     public int getItemCount() {
-        return ingredientList.size();
+        return recipeList.size();
     }
 
     /***
-     * Class definition of IngredientView holder which contains the attributes for our ingredient cards
+     * Class definition of RecipeView holder which contains the attributes fo our recipe card
      */
-    class IngredientViewHolder extends RecyclerView.ViewHolder {
+    class RecipeViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewTitle, textViewShortDesc, textViewDuration;
         ImageView imageView;
         TextView details;
         Button button;
 
-        public IngredientViewHolder(View itemView) {
+        public RecipeViewHolder(View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.textViewTitle);

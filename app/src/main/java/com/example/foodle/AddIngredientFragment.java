@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodle.ui.dashboard.Recipe;
-import com.example.foodle.ui.dashboard.RecipeAdapter;
+import com.example.foodle.model.Ingredient;
+import com.example.foodle.model.IngredientAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
