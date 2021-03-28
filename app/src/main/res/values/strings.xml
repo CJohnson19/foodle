@@ -7,4 +7,14 @@
     <string name="search_name">Search</string>
     <string name="ingredient_filter_label">Ingredients</string>
     <string name="recipe_filter_label">Recipes</string>
+    <string name="edit_ingredient_dialog_title">Edit Ingredient</string>
+    <string name="edit_ingredient_dialog_confirm">Set</string>
+    <string name="edit_ingredient_dialog_cancel">Cancel</string>
+    <string-array name="unit_array">
+        <item>units</item>
+        <item>lbs</item>
+        <item>oz</item>
+        <item>cups</item>
+        <item>liters</item>
+    </string-array>
 </resources>

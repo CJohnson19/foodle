@@ -92,6 +92,16 @@
                 android:layout_marginBottom="215dp"
                 android:text="Cooked!" />
 
+            <Button
+                android:id="@+id/editButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textDetails"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="215dp"
+                android:text="Edit" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

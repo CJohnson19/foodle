@@ -47,7 +47,7 @@ public class AddFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ingredientList = populateRecipes();
-        IngredientAdapter ingredientAdapter = new IngredientAdapter(getContext(), ingredientList);
+        IngredientAdapter ingredientAdapter = new IngredientAdapter(getContext(), ingredientList, getChildFragmentManager());
         recyclerView.setAdapter(ingredientAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 

@@ -152,7 +152,8 @@ public class SearchActivity extends AppCompatActivity {
             List<Ingredient> ingredients_sort = ingredients.stream()
                     .filter(filters)
                     .collect(Collectors.toList());
-            IngredientAdapter ingredientAdapter = new IngredientAdapter(this, ingredients_sort);
+            IngredientAdapter ingredientAdapter = new IngredientAdapter(this, ingredients_sort, getSupportFragmentManager());
+
             recyclerView.setAdapter(ingredientAdapter);
         }
         recyclerView.setItemAnimator(new DefaultItemAnimator());
