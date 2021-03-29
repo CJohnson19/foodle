@@ -14,10 +14,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import com.example.foodle.db.IngredientDB;
+import com.example.foodle.db.RecipeDB;
 import com.example.foodle.model.FilterCategory;
 import com.example.foodle.model.FilterOption;
 import com.example.foodle.model.Ingredient;
 import com.example.foodle.model.IngredientAdapter;
+import com.example.foodle.model.Pantry;
 import com.example.foodle.model.Recipe;
 import com.example.foodle.model.RecipeAdapter;
 import com.google.android.material.chip.Chip;
@@ -42,6 +45,11 @@ public class SearchActivity extends AppCompatActivity {
      * or if it should be every option.
      */
     public final static String HAVE = "HAVE";
+
+    /**
+     *
+     */
+    public final static String PANTRY = "PANTRY";
 
     /**
      * The recycler view that will present ingredients or
@@ -86,6 +94,12 @@ public class SearchActivity extends AppCompatActivity {
      */
     boolean have = false;
 
+    /**
+     * Holds pantry
+     */
+    private Pantry pantry;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,9 +109,9 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Get default options
-        recipes = setupRecipes();
+        recipes = RecipeDB.getStandardRecipes();
         recipeFilters = FilterOption.setupRecipeFilters();
-        ingredients = setupIngredients();
+        ingredients = IngredientDB.getStandardIngredients();
         ingredientFilters = FilterOption.setupIngredientFilters();
 
         // set up listeners so when categories are changed, the view is refreshed
@@ -120,6 +134,7 @@ public class SearchActivity extends AppCompatActivity {
             query = intent.getStringExtra(SearchManager.QUERY);
             category = (FilterCategory) intent.getSerializableExtra(CATEGORY);
             have = Boolean.parseBoolean(intent.getStringExtra(HAVE));
+            pantry = (Pantry) intent.getSerializableExtra(PANTRY);
             setupFilters();
             performSearch();
         }
@@ -141,7 +156,7 @@ public class SearchActivity extends AppCompatActivity {
             List<Recipe> recipes_sort = recipes.stream()
                     .filter(filters)
                     .collect(Collectors.toList());
-            RecipeAdapter recipeAdapter = new RecipeAdapter(this, recipes_sort);
+            RecipeAdapter recipeAdapter = new RecipeAdapter(this, recipes_sort, pantry);
             recyclerView.setAdapter(recipeAdapter);
         } else {
             Predicate<Ingredient> filters = (Ingredient r) -> r.getTitle().toLowerCase().contains(query)
@@ -168,101 +183,6 @@ public class SearchActivity extends AppCompatActivity {
         this.query = query;
         performSearch();
     }
-
-    /**
-     * Sets up default recipes.
-     * @return a list of {@link Recipe} objects
-     */
-    private List<Recipe> setupRecipes() {
-        List<Recipe> recipes = new ArrayList<>();
-        recipes.add(new Recipe(1,
-                "Authentic Mexican Chicken Soft Tacos",
-                "One of the best authentic mexican recipes out there!",
-                25,
-                R.drawable.tacos,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-
-        recipes.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
-                45,
-                R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n"));
-        recipes.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
-                45,
-                R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        recipes.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
-                45,
-                R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        recipes.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
-                45,
-                R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        recipes.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
-                45,
-                R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        return recipes;
-    }
-
-    /**
-     * Sets up default {@link Ingredient}
-     * @return a list of {@link Ingredient} objects
-     */
-    private List<Ingredient> setupIngredients() {
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient(1,
-                "Salt",
-                "The saltiest of them all!",
-                25,
-                R.drawable.salt,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-
-        ingredients.add(new Ingredient(1,
-                "Butter",
-                "The finest butter ever!",
-                45,
-                R.drawable.butter,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n"));
-        ingredients.add(new Ingredient(1,
-                "Sugar",
-                "The sweetest of them all!",
-                45,
-                R.drawable.sugar,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        ingredients.add(new Ingredient(1,
-                "Bananas",
-                "The best of them all!",
-                45,
-                R.drawable.bananas,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        ingredients.add(new Ingredient(1,
-                "Milk",
-                "The finest milk ever!",
-                45,
-                R.drawable.milk,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        ingredients.add(new Ingredient(1,
-                "Cheese",
-                "Cheesiest of them all!",
-                45,
-                R.drawable.cheese,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        return ingredients;
-
-    }
-
-
     /**
      * Sets up the filters for either the ingredients or recipes by
      * creating a {@link Chip} for each {@link FilterOption} that is

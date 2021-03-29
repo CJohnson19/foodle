@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.SearchManager;
 import android.content.ComponentName;
@@ -16,17 +18,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.foodle.model.FilterCategory;
+import com.example.foodle.model.Pantry;
+import com.example.foodle.model.PantryViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private FilterCategory category = FilterCategory.RECIPES;
     private boolean have = true;
+    private PantryViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
@@ -36,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFragment()).commit();
+        viewModel = new ViewModelProvider(this).get(PantryViewModel.class);
+        viewModel.getPantry().setValue(new Pantry());
+        viewModel.getPantry().observe(this, pantry -> {
+            System.out.println("Change detected in main activity");
+        });
     }
 
     @Override
@@ -58,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 searchIntent.putExtra(SearchManager.QUERY, query);
                 searchIntent.putExtra(SearchActivity.CATEGORY, category);
                 searchIntent.putExtra(SearchActivity.HAVE, have ? "true" : "false");
+                searchIntent.putExtra(SearchActivity.PANTRY, viewModel.getPantry().getValue());
                 startActivity(searchIntent);
                 return true;
             }

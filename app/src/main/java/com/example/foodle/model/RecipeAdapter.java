@@ -21,13 +21,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
      * RecipeList -> Database of all the recipes
      */
     private Context mCtx;
+    private Pantry pantry;
     private List<Recipe> recipeList;
     int mExpandedPosition = -1;
 
 
-    public RecipeAdapter(Context mCtx, List<Recipe> recipeList) {
+    public RecipeAdapter(Context mCtx, List<Recipe> recipeList, Pantry pantry) {
         this.mCtx = mCtx;
         this.recipeList = recipeList;
+        this.pantry = pantry;
     }
 
     /***
@@ -56,6 +58,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         final boolean isExpanded = position==mExpandedPosition;
         holder.details.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         holder.button.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        holder.button.setOnClickListener(v -> {
+            try {
+                pantry.cookRecipe(recipe);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Not enough ingredients");
+            }
+        });
         holder.details.setText(recipe.getDetails());
         holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
