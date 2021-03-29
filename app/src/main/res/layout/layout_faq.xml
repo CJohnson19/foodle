@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="73dp"
+        android:text=
+            "FAQs
+
+1. How does the app generate recipes?
+Ans: The app generates recipes based on your preferences and our machine learning model
+
+2. How can my manage my pantry?
+Ans: You can manage pantry by adding ingredients manually or scanning barcodes using your camera.
+
+Contact information:
+contact@foddle.com
+"
+        android:textSize="30sp" />
+</RelativeLayout>

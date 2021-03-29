@@ -1,13 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/holo_red_dark">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your preferences"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:text="Brendon Moore"
+        android:textSize="30sp" />
+
+    <Switch
+        android:id="@+id/NotificationSwitch"
+        android:layout_width="109dp"
+        android:layout_height="37dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="200dp"
+        android:text="Switch" />
+
+    <Switch
+        android:id="@+id/ClearDataSwitch"
+        android:layout_width="109dp"
+        android:layout_height="37dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="160dp"
+        android:text="Switch" />
+
+    <TextView
+        android:id="@+id/Notification"
+        android:layout_width="190dp"
+        android:layout_height="32dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@id/NotificationSwitch"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="200dp"
+        android:text="Enable Notifications" />
+
+    <TextView
+        android:id="@+id/ClearData"
+        android:layout_width="190dp"
+        android:layout_height="32dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@id/ClearDataSwitch"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="160dp"
+        android:text="Clear Data" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="84dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/FAQbutton"
+        android:layout_width="380dp"
+        android:layout_height="37dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="70dp"
+        android:text="FAQ" />
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="290dp"
+        android:layout_marginLeft="30dp"
+        android:text="Dietary Restrictions"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/Vegan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegan" />
+        <CheckBox
+            android:id="@+id/Vegetarian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegetarian"/>
+        <CheckBox
+            android:id="@+id/Pescatarian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pescatarian"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Dietary"
+        android:layout_width="104dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="238dp"
+        android:gravity="center"
+        android:text="Dietary Restrictions"
+        android:textSize="16sp" />
 
 </RelativeLayout>
+
+
+
+
+<!--FAQ-->
+<!--Preferences-->
+<!--Mock -->
+<!---->
