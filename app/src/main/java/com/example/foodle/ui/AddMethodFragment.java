@@ -49,6 +49,7 @@ public class AddMethodFragment extends Fragment {
         try {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         } catch (ActivityNotFoundException e) {
+            System.out.println(e.toString());
             // display error state to the user
         }
     }

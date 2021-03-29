@@ -1,8 +1,10 @@
-package com.example.foodle;
+package com.example.foodle.model;
 
 import android.widget.Button;
 
-public class Ingredient {
+import java.util.List;
+
+public class Recipe implements Filterable {
     /***
      * Attributes
      *
@@ -18,14 +20,16 @@ public class Ingredient {
     private int duration;
     private int image;
     private String details;
+    private List<Ingredient> ingredientList;
 
-    public Ingredient(int id, String title, String description, int duration, int image, String details) {
+    public Recipe(int id, String title, String description, int duration, int image, String details, List<Ingredient> ingredients) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.duration = duration;
         this.image = image;
         this.details = details;
+        this.ingredientList = ingredients;
     }
 
     public int getId() {
@@ -49,4 +53,9 @@ public class Ingredient {
     }
 
     public String getDetails() { return details; }
+
+    public List<Ingredient> getIngredientList() {
+        return ingredientList;
+    }
+
 }

@@ -1,29 +1,29 @@
-package com.example.foodle.ui.dashboard;
+package com.example.foodle.model;
 
 import android.widget.Button;
 
-public class Recipe {
+public class Ingredient implements Filterable {
     /***
      * Attributes
      *
      * id -> unique id for each recipe
      * title -> Name of the dish
      * description -> A short description of the dish
-     * duration -> Cooking time
+     * quantity -> How many units are present
      * image -> image of the food
      */
     private int id;
     private String title;
     private String description;
-    private int duration;
+    private int quantity;
     private int image;
     private String details;
 
-    public Recipe(int id, String title, String description, int duration, int image, String details) {
+    public Ingredient(int id, String title, String description, int quantity, int image, String details) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.duration = duration;
+        this.quantity = quantity;
         this.image = image;
         this.details = details;
     }
@@ -40,8 +40,12 @@ public class Recipe {
         return description;
     }
 
-    public int getDuration() {
-        return duration;
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getImage() {

@@ -1,8 +1,6 @@
-package com.example.foodle.ui.dashboard;
+package com.example.foodle.model;
 
-import android.app.MediaRouteButton;
 import android.content.Context;
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,26 +8,32 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodle.R;
+import com.example.foodle.ui.EditIngredientFragment;
 
 import java.util.List;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>{
+public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.IngredientViewHolder>{
 
     /***
      * mCtx -> Context for the layout
      * RecipeList -> Database of all the recipes
      */
     private Context mCtx;
-    private List<Recipe> recipeList;
+    private FragmentManager fragmentManager;
+    private List<Ingredient> ingredientList;
     int mExpandedPosition = -1;
 
 
-    public RecipeAdapter(Context mCtx, List<Recipe> recipeList) {
+    public IngredientAdapter(Context mCtx, List<Ingredient> ingredientList, FragmentManager fragmentManager) {
         this.mCtx = mCtx;
-        this.recipeList = recipeList;
+        this.ingredientList = ingredientList;
+        this.fragmentManager = fragmentManager;
     }
 
     /***
@@ -39,26 +43,27 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
      */
 
     @Override
-    public RecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public IngredientViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.layout_recipe_card, null);
+        View view = inflater.inflate(R.layout.layout_ingredients, null);
         System.out.println("Opening View Holder");
-        return new RecipeViewHolder(view);
+        return new IngredientViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecipeViewHolder holder, int position) {
+    public void onBindViewHolder(IngredientViewHolder holder, int position) {
         //getting the product of the specified position
-        Recipe recipe = recipeList.get(position);
-        holder.textViewTitle.setText(recipe.getTitle());
-        holder.textViewShortDesc.setText(recipe.getDescription());
-        holder.textViewDuration.setText(String.valueOf(recipe.getDuration()));
-        holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(recipe.getImage()));
+        Ingredient ingredient = ingredientList.get(position);
+        holder.textViewTitle.setText(ingredient.getTitle());
+        holder.textViewShortDesc.setText(ingredient.getDescription());
+        holder.textViewDuration.setText(String.valueOf(ingredient.getQuantity()));
+        holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(ingredient.getImage()));
         final boolean isExpanded = position==mExpandedPosition;
         holder.details.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         holder.button.setVisibility(isExpanded?View.VISIBLE:View.GONE);
-        holder.details.setText(recipe.getDetails());
+        holder.editButton.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        holder.details.setText(ingredient.getDetails());
         holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,20 +78,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     @Override
     public int getItemCount() {
-        return recipeList.size();
+        return ingredientList.size();
     }
 
     /***
-     * Class definition of RecipeView holder which contains the attributes fo our recipe card
+     * Class definition of IngredientView holder which contains the attributes for our ingredient cards
      */
-    class RecipeViewHolder extends RecyclerView.ViewHolder {
+    class IngredientViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewTitle, textViewShortDesc, textViewDuration;
         ImageView imageView;
         TextView details;
-        Button button;
+        Button button, editButton;
 
-        public RecipeViewHolder(View itemView) {
+        public IngredientViewHolder(View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
@@ -95,6 +100,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             imageView = itemView.findViewById(R.id.imageView);
             details = itemView.findViewById(R.id.textDetails);
             button = itemView.findViewById(R.id.button2);
+            editButton = itemView.findViewById(R.id.editButton);
+            editButton.setOnClickListener(v -> {
+                DialogFragment editFragment = new EditIngredientFragment();
+                editFragment.show(fragmentManager, "edit");
+            });
         }
     }
 }
