@@ -48,7 +48,7 @@ public class DashboardFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         recipeList = populateRecipes();
-        RecipeAdapter recipeAdapter = new RecipeAdapter(getContext(), recipeList);
+        RecipeAdapter recipeAdapter = new RecipeAdapter(getContext(), recipeList, null);
         recyclerView.setAdapter(recipeAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 

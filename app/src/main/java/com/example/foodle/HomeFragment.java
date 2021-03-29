@@ -8,10 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodle.db.IngredientDB;
+import com.example.foodle.db.RecipeDB;
+import com.example.foodle.model.Pantry;
+import com.example.foodle.model.PantryViewModel;
 import com.example.foodle.model.Recipe;
 import com.example.foodle.model.RecipeAdapter;
 
@@ -22,6 +27,8 @@ public class HomeFragment extends Fragment {
 
     List<Recipe> recipeList;
     RecyclerView recyclerView;
+    MainActivity mainActivity;
+    private PantryViewModel viewModel;
 
     @Nullable
     @Override
@@ -34,58 +41,27 @@ public class HomeFragment extends Fragment {
 
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mainActivity = (MainActivity) getActivity();
 
-        recipeList = populateRecipes();
-        RecipeAdapter recipeAdapter = new RecipeAdapter(getContext(), recipeList);
-        recyclerView.setAdapter(recipeAdapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recipeList = RecipeDB.getStandardRecipes();
 
         return root;
     }
 
-    /***
-     * Populates the recipe list with the database of recipe
-     * @return recipeList
-     */
-    private List<Recipe> populateRecipes() {
-        ArrayList<Recipe> recipeList = new ArrayList<>();
-        recipeList.add(new Recipe(1,
-                "Authentic Mexican Chicken Soft Tacos",
-                "One of the best authentic mexican recipes out there!",
-                25,
-                R.drawable.tacos,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(PantryViewModel.class);
+        viewModel.getPantry().observe(getViewLifecycleOwner(), pantry -> {
+            // Update the list UI
+            updatePantry();
+        });
+        updatePantry();
+    }
 
-        recipeList.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
-                45,
-                R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n"));
-        recipeList.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
-                45,
-                R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        recipeList.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
-                45,
-                R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        recipeList.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
-                45,
-                R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        recipeList.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
-                45,
-                R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        return recipeList;
+    public void updatePantry() {
+        RecipeAdapter recipeAdapter = new RecipeAdapter(getContext(), recipeList, viewModel.getPantry().getValue());
+        recyclerView.setAdapter(recipeAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 }
