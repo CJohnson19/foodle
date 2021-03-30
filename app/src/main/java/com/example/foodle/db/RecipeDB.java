@@ -17,7 +17,7 @@ public class RecipeDB {
                 "The saltiest of them all!",
                 15,
                 R.drawable.salt,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
+                " \n sdflsdfj sdkfjsdfj sdlkfj\n"));
         tacoIngredients.add(new Ingredient(1,
                 "Butter",
                 "The finest butter ever!",
@@ -29,21 +29,21 @@ public class RecipeDB {
                 "One of the best authentic mexican recipes out there!",
                 25,
                 R.drawable.tacos,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n",
+                "Ingredients: \n Salt - 15 units\n Butter - 10 units \n Sugar - 10 units\n Recipe: \nCook butter for 10 minutes \n Add Salt to the pan\n Add Sugar to the pan \n Add Sugar to the pan\nAdd Sugar to the pan  \n Heat the mixture for 15 minutes \n Bake the mixture for 10 minutes\n  Rest in room temperature for 5 minutes \n Add pizza sauce \n Add sugar \n Add basil \n Add Cheese of your choide ",
                 tacoIngredients));
         recipeList.add(new Recipe(1,
                 "New York Neapolitan Pizza",
                 "Top Chef approved mouthwatering recipe",
                 45,
                 R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n",
+                "Ingredients: \n Salt - 15 units\n Butter - 10 units \n Sugar - 10 units\n Recipe: \nCook butter for 10 minutes \n Add Salt to the pan \n Add Sugar to the pan \n Add Sugar to the pan\nAdd Sugar to the pan  \n Heat the mixture for 15 minutes \n Bake the mixture for 10 minutes\n  Rest in room temperature for 5 minutes \n Add pizza sauce \n Add sugar \n Add basil \n Add Cheese of your choide ",
                 tacoIngredients));
         recipeList.add(new Recipe(1,
                 "New York Neapolitan Pizza",
                 "Top Chef approved mouthwatering recipe",
                 45,
                 R.drawable.pizza,
-                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n",
+                "Ingredients: \n Salt - 15 units\n Butter - 10 units \n Sugar - 10 units\n Recipe: \nCook butter for 10 minutes \n Add Salt to the pan\n Add Sugar to the pan \n Add Sugar to the pan\nAdd Sugar to the pan  \n Heat the mixture for 15 minutes \n Bake the mixture for 10 minutes\n  Rest in room temperature for 5 minutes \n Add pizza sauce \n Add sugar \n Add basil \n Add Cheese of your choide ",
                 tacoIngredients));
         return recipeList;
     }
