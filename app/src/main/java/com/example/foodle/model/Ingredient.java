@@ -2,7 +2,9 @@ package com.example.foodle.model;
 
 import android.widget.Button;
 
-public class Ingredient implements Filterable {
+import java.io.Serializable;
+
+public class Ingredient implements Filterable, Serializable {
     /***
      * Attributes
      *

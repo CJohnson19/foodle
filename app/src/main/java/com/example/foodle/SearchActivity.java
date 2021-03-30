@@ -3,6 +3,8 @@ package com.example.foodle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +15,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 
 import com.example.foodle.db.IngredientDB;
 import com.example.foodle.db.RecipeDB;
@@ -21,6 +24,7 @@ import com.example.foodle.model.FilterOption;
 import com.example.foodle.model.Ingredient;
 import com.example.foodle.model.IngredientAdapter;
 import com.example.foodle.model.Pantry;
+import com.example.foodle.model.PantryViewModel;
 import com.example.foodle.model.Recipe;
 import com.example.foodle.model.RecipeAdapter;
 import com.google.android.material.chip.Chip;
@@ -45,6 +49,13 @@ public class SearchActivity extends AppCompatActivity {
      * or if it should be every option.
      */
     public final static String HAVE = "HAVE";
+
+    /**
+     * Constant to refer to when sending an intent.
+     * Represents if the page should only present options the user has
+     * or if it should be every option.
+     */
+    public final static int RESULT = 10;
 
     /**
      *
@@ -97,7 +108,12 @@ public class SearchActivity extends AppCompatActivity {
     /**
      * Holds pantry
      */
-    private Pantry pantry;
+    private PantryViewModel viewModel;
+
+    /**
+     * Holds the search widget to be cleared later.
+     */
+    private SearchView searchView;
 
 
     @Override
@@ -108,6 +124,18 @@ public class SearchActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+                intent.putExtra(SearchActivity.PANTRY, viewModel.getPantry().getValue());
+                setResult(RESULT_OK, intent);
+                searchView.setQuery("", false);
+                searchView.clearFocus();
+                finish();
+            }
+        });
+        viewModel = new ViewModelProvider(this).get(PantryViewModel.class);
         // Get default options
         recipes = RecipeDB.getStandardRecipes();
         recipeFilters = FilterOption.setupRecipeFilters();
@@ -134,7 +162,8 @@ public class SearchActivity extends AppCompatActivity {
             query = intent.getStringExtra(SearchManager.QUERY);
             category = (FilterCategory) intent.getSerializableExtra(CATEGORY);
             have = Boolean.parseBoolean(intent.getStringExtra(HAVE));
-            pantry = (Pantry) intent.getSerializableExtra(PANTRY);
+            Pantry pantry = (Pantry) intent.getSerializableExtra(PANTRY);
+            viewModel.getPantry().setValue(pantry);
             setupFilters();
             performSearch();
         }
@@ -156,7 +185,7 @@ public class SearchActivity extends AppCompatActivity {
             List<Recipe> recipes_sort = recipes.stream()
                     .filter(filters)
                     .collect(Collectors.toList());
-            RecipeAdapter recipeAdapter = new RecipeAdapter(this, recipes_sort, pantry);
+            RecipeAdapter recipeAdapter = new RecipeAdapter(this, recipes_sort, viewModel.getPantry().getValue());
             recyclerView.setAdapter(recipeAdapter);
         } else {
             Predicate<Ingredient> filters = (Ingredient r) -> r.getTitle().toLowerCase().contains(query)
@@ -230,7 +259,7 @@ public class SearchActivity extends AppCompatActivity {
         inflater.inflate(R.menu.options_menu, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.app_bar_search).getActionView();
+        searchView = (SearchView) menu.findItem(R.id.app_bar_search).getActionView();
         searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setQueryHint(getResources().getString(R.string.search_hint));
