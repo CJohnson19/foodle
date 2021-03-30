@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 searchIntent.putExtra(SearchActivity.CATEGORY, category);
                 searchIntent.putExtra(SearchActivity.HAVE, have ? "true" : "false");
                 searchIntent.putExtra(SearchActivity.PANTRY, viewModel.getPantry().getValue());
-                startActivity(searchIntent);
+                startActivityForResult(searchIntent, SearchActivity.RESULT);
                 return true;
             }
 
@@ -92,6 +92,17 @@ public class MainActivity extends AppCompatActivity {
         });
         return true;
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SearchActivity.RESULT) {
+            Pantry pantry = (Pantry) data.getSerializableExtra(SearchActivity.PANTRY);
+            viewModel.getPantry().setValue(pantry);
+        }
+    }
+
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
