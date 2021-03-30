@@ -20,8 +20,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="200dp"
-        android:text="Switch" />
+        android:layout_marginBottom="200dp" />
 
     <Switch
         android:id="@+id/ClearDataSwitch"
@@ -30,8 +29,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="160dp"
-        android:text="Switch" />
+        android:layout_marginBottom="160dp" />
 
     <TextView
         android:id="@+id/Notification"
@@ -62,7 +60,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="84dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/avatar" />
 
     <Button
         android:id="@+id/FAQbutton"
@@ -78,50 +76,17 @@
         android:text="FAQ" />
 
 
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="290dp"
-        android:layout_marginLeft="30dp"
-        android:text="Dietary Restrictions"
-        android:orientation="vertical">
-
-        <CheckBox
-            android:id="@+id/Vegan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vegan" />
-        <CheckBox
-            android:id="@+id/Vegetarian"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vegetarian"/>
-        <CheckBox
-            android:id="@+id/Pescatarian"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pescatarian"/>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/Dietary"
-        android:layout_width="104dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
+    <Button
+        android:id="@+id/RestrictionButton"
+        android:layout_width="380dp"
+        android:layout_height="37dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="238dp"
-        android:gravity="center"
-        android:text="Dietary Restrictions"
-        android:textSize="16sp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="25dp"
+        android:text="Dietary Restrictions" />
 
 </RelativeLayout>
-
-
-
-
-<!--FAQ-->
-<!--Preferences-->
-<!--Mock -->
-<!---->

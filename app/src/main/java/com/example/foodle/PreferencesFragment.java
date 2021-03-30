@@ -16,11 +16,18 @@ public class PreferencesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_preferences, container, false);
-        Button button = view.findViewById(R.id.FAQbutton);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button FaqButton = view.findViewById(R.id.FAQbutton);
+        FaqButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFAQ(v);
+            }
+        });
+        Button RestrictionButton = view.findViewById(R.id.RestrictionButton);
+        RestrictionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getRestrictions(v);
             }
         });
         return view;
@@ -28,6 +35,11 @@ public class PreferencesFragment extends Fragment {
 
     public void getFAQ(View view){
         Intent intent = new Intent(getActivity(), FaqActivity.class);
+        startActivity(intent);
+    }
+
+    public void getRestrictions(View view){
+        Intent intent = new Intent(getActivity(), RestrictionsActivity.class);
         startActivity(intent);
     }
 }

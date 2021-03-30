@@ -6,22 +6,81 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/Heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="73dp"
-        android:text=
-            "FAQs
+        android:text="FAQ"
+        android:textColor="@color/black"
+        android:textSize="35sp" />
 
-1. How does the app generate recipes?
-Ans: The app generates recipes based on your preferences and our machine learning model
+    <TextView
+        android:id="@+id/q1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="158dp"
+        android:text="1. How does the app generate recipes?"
+        android:textSize="20sp" />
 
-2. How can my manage my pantry?
-Ans: You can manage pantry by adding ingredients manually or scanning barcodes using your camera.
+    <TextView
+        android:id="@+id/a1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="210dp"
+        android:layout_marginEnd="22dp"
+        android:text="Ans: The app generates recipes based on your preferences and our machine learning model"
+        android:textSize="20sp" />
 
-Contact information:
-contact@foddle.com
-"
-        android:textSize="30sp" />
+    <TextView
+        android:id="@+id/q2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="376dp"
+        android:text="2. How can I manage my pantry?"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/a2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginEnd="27dp"
+        android:text="Ans: You can manage pantry by adding ingredients manually or scanning barcodes using your camera."
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="588dp"
+        android:layout_marginEnd="48dp"
+        android:text="Contact: contact@foddle.com"
+        android:textSize="20sp" />
+
 </RelativeLayout>
+

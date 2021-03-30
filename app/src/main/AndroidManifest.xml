@@ -34,6 +34,12 @@
                 android:name="android.app.default_searchable"
                 android:value=".SearchActivity"/>
         </activity>
+        <activity android:name=".FaqActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".RestrictionsActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>
