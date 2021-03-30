@@ -1,25 +1,27 @@
 package com.example.foodle;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModelProvider;
-
+import android.Manifest;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.foodle.model.FilterCategory;
 import com.example.foodle.model.Pantry;
 import com.example.foodle.model.PantryViewModel;
+import com.example.foodle.ui.AddMethodFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getPantry().observe(this, pantry -> {
             System.out.println("Change detected in main activity");
         });
+
+        int cameraPermission = this.checkSelfPermission(Manifest.permission.CAMERA);
+        int REQUEST_PERMISSION = 100;
+        if(cameraPermission != PackageManager.PERMISSION_GRANTED) {
+            this.requestPermissions(
+                    new String[]{Manifest.permission.CAMERA},
+                    REQUEST_PERMISSION
+            );
+        }
     }
 
     @Override
@@ -100,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
                             have = false;
                             break;
                         case R.id.nav_add:
-                            selectedFrag = new AddIngredientFragment();
+                            //dispatchTakePictureIntent();
+                            selectedFrag = new AddMethodFragment();
                             break;
                         case R.id.nav_pantry:
                             selectedFrag = new PantryFragment();
@@ -119,4 +131,5 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
 }
