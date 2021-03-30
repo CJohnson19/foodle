@@ -110,6 +110,11 @@ public class SearchActivity extends AppCompatActivity {
      */
     private PantryViewModel viewModel;
 
+    /**
+     * Holds the search widget to be cleared later.
+     */
+    private SearchView searchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +130,8 @@ public class SearchActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchActivity.this, MainActivity.class);
                 intent.putExtra(SearchActivity.PANTRY, viewModel.getPantry().getValue());
                 setResult(RESULT_OK, intent);
+                searchView.setQuery("", false);
+                searchView.clearFocus();
                 finish();
             }
         });
@@ -252,7 +259,7 @@ public class SearchActivity extends AppCompatActivity {
         inflater.inflate(R.menu.options_menu, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.app_bar_search).getActionView();
+        searchView = (SearchView) menu.findItem(R.id.app_bar_search).getActionView();
         searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setQueryHint(getResources().getString(R.string.search_hint));

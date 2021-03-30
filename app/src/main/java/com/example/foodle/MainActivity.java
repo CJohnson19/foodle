@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private FilterCategory category = FilterCategory.RECIPES;
     private boolean have = true;
     private PantryViewModel viewModel;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.options_menu, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.app_bar_search).getActionView();
+        searchView = (SearchView) menu.findItem(R.id.app_bar_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, SearchActivity.class)));
         searchView.setQueryHint(getResources().getString(R.string.search_hint));
         searchView.setSubmitButtonEnabled(true);
@@ -96,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        searchView.setQuery("", false);
+        searchView.clearFocus();
+        searchView.setIconified(true);
         if (requestCode == SearchActivity.RESULT) {
             Pantry pantry = (Pantry) data.getSerializableExtra(SearchActivity.PANTRY);
             viewModel.getPantry().setValue(pantry);
