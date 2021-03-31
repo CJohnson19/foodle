@@ -6,44 +6,81 @@ import com.example.foodle.model.Ingredient;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.measure.Quantity;
+import javax.measure.Unit;
+import javax.measure.quantity.AmountOfSubstance;
+import javax.measure.quantity.Mass;
+import javax.measure.quantity.Volume;
+
+import systems.uom.common.USCustomary;
+import tech.units.indriya.format.SimpleUnitFormat;
+import tech.units.indriya.quantity.Quantities;
+
+import static systems.uom.common.Imperial.QUART;
+import static systems.uom.common.USCustomary.*;
+
 public class IngredientDB {
-    public static List<Ingredient> getStandardIngredients() {
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient(1,
+    /**
+     * This is important because it adds aliases to the service
+     * we use to parse strings into quantities.
+     */
+    public static void initializeIngredientDB() {
+        SimpleUnitFormat.getInstance().alias(TABLESPOON, "tbsp");
+        SimpleUnitFormat.getInstance().alias(TEASPOON, "tsp");
+        SimpleUnitFormat.getInstance().alias(CUP, "cup");
+        SimpleUnitFormat.getInstance().alias(PINT, "pt");
+        SimpleUnitFormat.getInstance().alias(PINT, "pint");
+        SimpleUnitFormat.getInstance().alias(QUART, "qt");
+        SimpleUnitFormat.getInstance().alias(QUART, "quart");
+        SimpleUnitFormat.getInstance().alias(FLUID_OUNCE, "floz");
+        SimpleUnitFormat.getInstance().alias(OUNCE, "ounce");
+    }
+    public static List<Ingredient<?>> getStandardIngredients() {
+        List<Ingredient<?>> ingredients = new ArrayList<>();
+        Quantity<Volume> saltQuantity = Quantities.getQuantity(10, TABLESPOON);
+        ingredients.add(new Ingredient<Volume>(10,
                 "Salt",
                 "The saltiest of them all!",
-                25,
+                saltQuantity,
                 R.drawable.salt,
                 "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
 
-        ingredients.add(new Ingredient(1,
+        Quantity<Volume> butterQuantity = Quantities.getQuantity(1, CUP);
+        ingredients.add(new Ingredient<Volume>(1,
                 "Butter",
                 "The finest butter ever!",
-                45,
+                butterQuantity,
                 R.drawable.butter,
                 "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n"));
-        ingredients.add(new Ingredient(1,
+
+        Quantity<Volume> sugarQuantity = Quantities.getQuantity(2, CUP);
+        ingredients.add(new Ingredient<Volume>(1,
                 "Sugar",
                 "The sweetest of them all!",
-                45,
+                sugarQuantity,
                 R.drawable.sugar,
                 "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        ingredients.add(new Ingredient(1,
+
+        Quantity<Mass> bananaAmount = Quantities.getQuantity(2, POUND);
+        ingredients.add(new Ingredient<Mass>(1,
                 "Bananas",
                 "The best of them all!",
-                45,
+                bananaAmount,
                 R.drawable.bananas,
                 "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        ingredients.add(new Ingredient(1,
+
+        Quantity<Volume> milkAmount = Quantities.getQuantity(2, GALLON_LIQUID);
+        ingredients.add(new Ingredient<Volume>(1,
                 "Milk",
                 "The finest milk ever!",
-                45,
+                milkAmount,
                 R.drawable.milk,
                 "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
-        ingredients.add(new Ingredient(1,
+        Quantity<Mass> cheeseAmount = Quantities.getQuantity(2, OUNCE);
+        ingredients.add(new Ingredient<Mass>(1,
                 "Cheese",
                 "Cheesiest of them all!",
-                45,
+                cheeseAmount,
                 R.drawable.cheese,
                 "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
 

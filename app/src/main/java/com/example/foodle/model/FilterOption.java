@@ -93,7 +93,7 @@ public class FilterOption<T extends Filterable> {
     public static List<FilterOption<Recipe>> setupRecipeFilters() {
         List<FilterOption<Recipe>> filters = new ArrayList<>();
         filters.add(new FilterOption<>("Quick Meals",
-                (r) -> r.getDuration() < 30, false));
+                (r) -> r.getDurationMinutes() < 30, false));
         filters.add(new FilterOption<>("Mexican",
                 (r) -> r.getDescription().toLowerCase().contains("mexican"), false));
         filters.add(new FilterOption<>("Vegetarian",
@@ -107,8 +107,8 @@ public class FilterOption<T extends Filterable> {
      * Basic mock ingredient filters
      * @return a List of {@link FilterOption}s for {@link Ingredient}s.
      */
-    public static List<FilterOption<Ingredient>> setupIngredientFilters() {
-        List<FilterOption<Ingredient>> filters = new ArrayList<>();
+    public static List<FilterOption<Ingredient<?>>> setupIngredientFilters() {
+        List<FilterOption<Ingredient<?>>> filters = new ArrayList<>();
         filters.add(new FilterOption<>("Vegetables",
                 (i) -> i.getDescription().toLowerCase().contains("vegetable"), false));
         filters.add(new FilterOption<>("Meats",

@@ -24,7 +24,7 @@ import com.example.foodle.model.Recipe;
 import java.util.List;
 
 public class PantryFragment extends Fragment {
-    List<Ingredient> ingredientList;
+    List<Ingredient<?>> ingredientList;
     RecyclerView recyclerView;
     private PantryViewModel viewModel;
 

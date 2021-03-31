@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Pantry implements Serializable {
-    private List<Ingredient> ingredients;
-    private HashMap<String, Ingredient> ingredientHashMap = new HashMap<>();
+    private List<Ingredient<?>> ingredients;
+    private HashMap<String, Ingredient<?>> ingredientHashMap = new HashMap<>();
 
-    public Pantry(List<Ingredient> ingredients) {
+    public Pantry(List<Ingredient<?>> ingredients) {
         this.ingredients = ingredients;
         this.ingredientHashMap = new HashMap<>();
         for (Ingredient i : this.ingredients) {
@@ -30,9 +30,9 @@ public class Pantry implements Serializable {
     }
 
     public void cookRecipe(Recipe recipe) throws IllegalArgumentException {
-        for (Ingredient i : recipe.getIngredientList()) {
+        for (Ingredient<?> i : recipe.getIngredientList()) {
             try {
-                if(ingredientHashMap.getOrDefault(i.getTitle(), null).getQuantity() - i.getQuantity() < 0) {
+                if(ingredientHashMap.getOrDefault(i.getTitle(), null).hasMoreQuantityThan(i.getQuantity())){
                     throw new IllegalArgumentException("Not enough ingredients");
                 }
             } catch (NullPointerException e) {
@@ -41,16 +41,16 @@ public class Pantry implements Serializable {
         }
         // We have all the ingredients
         for (Ingredient i : recipe.getIngredientList()) {
-            Ingredient currIngredient = ingredientHashMap.get(i.getTitle());
-            currIngredient.setQuantity(currIngredient.getQuantity() - i.getQuantity());
+            Ingredient<?> currIngredient = ingredientHashMap.get(i.getTitle());
+            currIngredient.subtractQuantity(i.getQuantity());
             ingredientHashMap.put(currIngredient.getTitle(), currIngredient);
         }
         this.ingredients = ingredients.stream()
-                .filter(ingredient -> ingredient.getQuantity() > 0)
+                .filter(Ingredient::hasNonZeroQuantity)
                 .collect(Collectors.toList());
     }
 
-    public List<Ingredient> getIngredients() {
+    public List<Ingredient<?>> getIngredients() {
         return this.ingredients;
     }
 

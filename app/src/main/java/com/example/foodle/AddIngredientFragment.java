@@ -23,7 +23,7 @@ import java.util.List;
 
 public class AddIngredientFragment extends Fragment {
 
-    List<Ingredient> ingredientList;
+    List<Ingredient<?>> ingredientList;
     RecyclerView recyclerView;
 
     @Nullable

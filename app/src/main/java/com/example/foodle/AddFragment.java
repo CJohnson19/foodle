@@ -21,7 +21,7 @@ package com.example.foodle;
 
 public class AddFragment extends Fragment {
 
-    List<Ingredient> ingredientList;
+    List<Ingredient<?>> ingredientList;
     RecyclerView recyclerView;
 
     private AddViewModel addViewModel;
@@ -58,8 +58,8 @@ public class AddFragment extends Fragment {
      * Populates the recipe list with the database of recipe
      * @return recipeList
      */
-    private List<Ingredient> populateRecipes() {
-        ArrayList<Ingredient> ingredientList = new ArrayList<>();
+    private List<Ingredient<?>> populateRecipes() {
+        ArrayList<Ingredient<?>> ingredientList = new ArrayList<>();
 //        recipeList.add(new Recipe(1,
 //                "Authentic Mexican Chicken Soft Tacos",
 //                "One of the best authentic mexican recipes out there!",

@@ -40,6 +40,8 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.0-beta02'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'systems.uom:systems-common:2.0.2'
+    implementation 'javax.measure:unit-api:2.1.2'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

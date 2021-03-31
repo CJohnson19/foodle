@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.foodle.db.IngredientDB;
 import com.example.foodle.model.FilterCategory;
 import com.example.foodle.model.Pantry;
 import com.example.foodle.model.PantryViewModel;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        IngredientDB.initializeIngredientDB();
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);

@@ -78,7 +78,7 @@ public class SearchActivity extends AppCompatActivity {
      * All {@link FilterOption} of {@link Ingredient} type that are displayed
      * to the user through a {@link Chip}.
      */
-    private List<FilterOption<Ingredient>> ingredientFilters;
+    private List<FilterOption<Ingredient<?>>> ingredientFilters;
 
     /**
      * All recipes to be searched
@@ -88,7 +88,7 @@ public class SearchActivity extends AppCompatActivity {
     /**
      * All ingredients to be searched
      */
-    private List<Ingredient> ingredients;
+    private List<Ingredient<?>> ingredients;
 
     /**
      * Which category to display, either recipes or ingredients.
@@ -188,12 +188,12 @@ public class SearchActivity extends AppCompatActivity {
             RecipeAdapter recipeAdapter = new RecipeAdapter(this, recipes_sort, viewModel.getPantry().getValue());
             recyclerView.setAdapter(recipeAdapter);
         } else {
-            Predicate<Ingredient> filters = (Ingredient r) -> r.getTitle().toLowerCase().contains(query)
+            Predicate<Ingredient<?>> filters = (Ingredient<?> r) -> r.getTitle().toLowerCase().contains(query)
                     || r.getDescription().toLowerCase().contains(query);
-            for(FilterOption<Ingredient> filter : ingredientFilters) {
+            for(FilterOption<Ingredient<?>> filter : ingredientFilters) {
                 filters = filters.and(filter.getCriteria());
             }
-            List<Ingredient> ingredients_sort = ingredients.stream()
+            List<Ingredient<?>> ingredients_sort = ingredients.stream()
                     .filter(filters)
                     .collect(Collectors.toList());
             IngredientAdapter ingredientAdapter = new IngredientAdapter(this, ingredients_sort, getSupportFragmentManager());

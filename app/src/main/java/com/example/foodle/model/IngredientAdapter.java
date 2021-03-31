@@ -26,11 +26,11 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
      */
     private Context mCtx;
     private FragmentManager fragmentManager;
-    private List<Ingredient> ingredientList;
+    private List<Ingredient<?>> ingredientList;
     int mExpandedPosition = -1;
 
 
-    public IngredientAdapter(Context mCtx, List<Ingredient> ingredientList, FragmentManager fragmentManager) {
+    public IngredientAdapter(Context mCtx, List<Ingredient<?>> ingredientList, FragmentManager fragmentManager) {
         this.mCtx = mCtx;
         this.ingredientList = ingredientList;
         this.fragmentManager = fragmentManager;
