@@ -10,11 +10,14 @@
     <string name="edit_ingredient_dialog_title">Edit Ingredient</string>
     <string name="edit_ingredient_dialog_confirm">Set</string>
     <string name="edit_ingredient_dialog_cancel">Cancel</string>
-    <string-array name="unit_array">
-        <item>units</item>
-        <item>lbs</item>
-        <item>oz</item>
-        <item>cups</item>
-        <item>liters</item>
+    <string-array name="volume_array">
+        <item>Liters</item>
+        <item>Fluid Ounces</item>
+        <item>Tablespoons</item>
+        <item>Pints</item>
+        <item>Quarts</item>
+        <item>Gallons</item>
+    </string-array>
+    <string-array name="mass_array">
     </string-array>
 </resources>

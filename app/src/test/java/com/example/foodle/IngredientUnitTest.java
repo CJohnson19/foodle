@@ -13,10 +13,12 @@ import javax.measure.quantity.Volume;
 
 import systems.uom.common.Imperial;
 import tech.units.indriya.quantity.Quantities;
+import tech.units.indriya.unit.Units;
 
 import static org.junit.Assert.assertFalse;
 import static systems.uom.common.USCustomary.CUP;
 import static systems.uom.common.USCustomary.FLUID_OUNCE;
+import static systems.uom.common.USCustomary.LITER;
 import static systems.uom.common.USCustomary.OUNCE;
 import static systems.uom.common.USCustomary.PINT;
 import static systems.uom.common.USCustomary.POUND;
@@ -179,5 +181,37 @@ public class IngredientUnitTest {
     @Test(expected = MeasurementParseException.class)
     public void IngredientWithInvalidUnitThrowsMeasurementParseException() {
         Ingredient<Volume> i = new Ingredient<Volume>(1, "Test", "Test", "1 fooobar", 1, "Test");
+    }
+    @Test
+    public void IngredientLitersConstructor() {
+        Ingredient<Volume> i = new Ingredient<Volume>(1, "Test", "Test", "1 L", 1, "Test");
+        Quantity<Volume> expected = Quantities.getQuantity(1, LITER);
+        assertEquals(expected, i.getQuantity());
+    }
+    @Test
+    public void IngredientLitersAliasAddedLong() {
+        Ingredient<Volume> i = new Ingredient<Volume>(1, "Test", "Test", "1 liter", 1, "Test");
+        Quantity<Volume> expected = Quantities.getQuantity(1, LITER);
+        assertEquals(expected, i.getQuantity());
+    }
+    @Test
+    public void IngredientVolumeCompatibleWithLitre() {
+        Ingredient<Volume> i = new Ingredient<Volume>(1, "Test", "Test", "1 liter", 1, "Test");
+        assert(i.getQuantity().getUnit().isCompatible(Units.LITRE));
+    }
+    @Test
+    public void IngredientMassIncompatibleWithLitre() {
+        Ingredient<Mass> i = new Ingredient<Mass>(1, "Test", "Test", "1 lb", 1, "Test");
+        assertFalse(i.getQuantity().getUnit().isCompatible(Units.LITRE));
+    }
+    @Test
+    public void IngredientMassCompatibleWithKG() {
+        Ingredient<Mass> i = new Ingredient<Mass>(1, "Test", "Test", "1 lb", 1, "Test");
+        assert(i.getQuantity().getUnit().isCompatible(Units.KILOGRAM));
+    }
+    @Test
+    public void IngredientVolumeIncompatibleWithKG() {
+        Ingredient<Volume> i = new Ingredient<Volume>(1, "Test", "Test", "1 liter", 1, "Test");
+        assertFalse(i.getQuantity().getUnit().isCompatible(Units.KILOGRAM));
     }
 }

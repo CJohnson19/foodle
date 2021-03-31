@@ -1,5 +1,7 @@
 package com.example.foodle.db;
 
+import android.util.Pair;
+
 import com.example.foodle.R;
 import com.example.foodle.model.Ingredient;
 
@@ -15,6 +17,7 @@ import javax.measure.quantity.Volume;
 import systems.uom.common.USCustomary;
 import tech.units.indriya.format.SimpleUnitFormat;
 import tech.units.indriya.quantity.Quantities;
+import tech.units.indriya.unit.Units;
 
 import static systems.uom.common.Imperial.QUART;
 import static systems.uom.common.USCustomary.*;
@@ -34,6 +37,7 @@ public class IngredientDB {
         SimpleUnitFormat.getInstance().alias(QUART, "quart");
         SimpleUnitFormat.getInstance().alias(FLUID_OUNCE, "floz");
         SimpleUnitFormat.getInstance().alias(OUNCE, "ounce");
+        SimpleUnitFormat.getInstance().alias(LITER, "liter");
     }
     public static List<Ingredient<?>> getStandardIngredients() {
         List<Ingredient<?>> ingredients = new ArrayList<>();
@@ -85,5 +89,24 @@ public class IngredientDB {
                 "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
 
         return ingredients;
+    }
+
+    public static List<Pair<Unit<?>, String>> getMassUnits() {
+        List<Pair<Unit<?>,String>> out = new ArrayList<>();
+        out.add(new Pair<>(Units.KILOGRAM, "kg"));
+        out.add(new Pair<>(POUND, "lb"));
+        out.add(new Pair<>(OUNCE, "oz"));
+        out.add(new Pair<>(Units.GRAM, "g"));
+        return out;
+    }
+    public static List<Pair<Unit<?>, String>> getVolumeUnits() {
+        List<Pair<Unit<?>,String>> out = new ArrayList<>();
+        out.add(new Pair<>(Units.LITRE, "L"));
+        out.add(new Pair<>(FLUID_OUNCE, "fl oz"));
+        out.add(new Pair<>(TABLESPOON, "Tbsp"));
+        out.add(new Pair<>(PINT, "pt"));
+        out.add(new Pair<>(QUART, "qt"));
+        out.add(new Pair<>(GALLON_LIQUID, "Gal"));
+        return out;
     }
 }

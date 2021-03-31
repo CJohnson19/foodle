@@ -63,6 +63,10 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
         holder.details.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         holder.button.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         holder.editButton.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        holder.editButton.setOnClickListener(v -> {
+            DialogFragment editFragment = new EditIngredientFragment(ingredient);
+            editFragment.show(fragmentManager, "edit");
+        });
         holder.details.setText(ingredient.getDetails());
         holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -101,10 +105,6 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
             details = itemView.findViewById(R.id.textDetails);
             button = itemView.findViewById(R.id.button2);
             editButton = itemView.findViewById(R.id.editButton);
-            editButton.setOnClickListener(v -> {
-                DialogFragment editFragment = new EditIngredientFragment();
-                editFragment.show(fragmentManager, "edit");
-            });
         }
     }
 }
