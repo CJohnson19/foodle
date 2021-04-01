@@ -16,7 +16,7 @@ public class Pantry implements Serializable {
     public Pantry(List<Ingredient<?>> ingredients) {
         this.ingredients = ingredients;
         this.ingredientHashMap = new HashMap<>();
-        for (Ingredient i : this.ingredients) {
+        for (Ingredient<?> i : this.ingredients) {
             ingredientHashMap.put(i.getTitle(), i);
         }
     }
@@ -24,7 +24,7 @@ public class Pantry implements Serializable {
     public Pantry() {
         this.ingredients = IngredientDB.getStandardIngredients();
         this.ingredientHashMap = new HashMap<>();
-        for (Ingredient i : this.ingredients) {
+        for (Ingredient<?> i : this.ingredients) {
             ingredientHashMap.put(i.getTitle(), i);
         }
     }
@@ -32,7 +32,7 @@ public class Pantry implements Serializable {
     public void cookRecipe(Recipe recipe) throws IllegalArgumentException {
         for (Ingredient<?> i : recipe.getIngredientList()) {
             try {
-                if(ingredientHashMap.getOrDefault(i.getTitle(), null).hasMoreQuantityThan(i.getQuantity())){
+                if(!ingredientHashMap.getOrDefault(i.getTitle(), null).hasMoreQuantityThan(i.getQuantity())){
                     throw new IllegalArgumentException("Not enough ingredients");
                 }
             } catch (NullPointerException e) {
@@ -40,7 +40,7 @@ public class Pantry implements Serializable {
             }
         }
         // We have all the ingredients
-        for (Ingredient i : recipe.getIngredientList()) {
+        for (Ingredient<?> i : recipe.getIngredientList()) {
             Ingredient<?> currIngredient = ingredientHashMap.get(i.getTitle());
             currIngredient.subtractQuantity(i.getQuantity());
             ingredientHashMap.put(currIngredient.getTitle(), currIngredient);

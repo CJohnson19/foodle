@@ -214,4 +214,16 @@ public class IngredientUnitTest {
         Ingredient<Volume> i = new Ingredient<Volume>(1, "Test", "Test", "1 liter", 1, "Test");
         assertFalse(i.getQuantity().getUnit().isCompatible(Units.KILOGRAM));
     }
+    @Test
+    public void IngredientComparisonWorks() {
+        Ingredient<Volume> i = new Ingredient<Volume>(1, "Test", "Test", "1 liter", 1, "Test");
+        Ingredient<Volume> j = new Ingredient<Volume>(1, "Test", "Test", "2 liter", 1, "Test");
+        assert(j.hasMoreQuantityThan(i.getQuantity()));
+    }
+    @Test
+    public void IngredientComparisonReturnsFalse() {
+        Ingredient<Volume> i = new Ingredient<Volume>(1, "Test", "Test", "1 liter", 1, "Test");
+        Ingredient<Volume> j = new Ingredient<Volume>(1, "Test", "Test", "2 liter", 1, "Test");
+        assertFalse(i.hasMoreQuantityThan(j.getQuantity()));
+    }
 }

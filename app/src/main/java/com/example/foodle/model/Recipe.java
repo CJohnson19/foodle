@@ -56,7 +56,7 @@ public class Recipe implements Filterable {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.duration = CompoundQuantity.of((Quantity<Time>) Quantities.getQuantity(duration));
+        this.duration = CompoundQuantity.of(Quantities.getQuantity(duration).asType(Time.class));
         this.image = image;
         this.details = details;
         this.ingredientList = ingredients;

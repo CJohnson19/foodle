@@ -41,7 +41,7 @@ public class IngredientDB {
     }
     public static List<Ingredient<?>> getStandardIngredients() {
         List<Ingredient<?>> ingredients = new ArrayList<>();
-        Quantity<Volume> saltQuantity = Quantities.getQuantity(10, TABLESPOON);
+        Quantity<Volume> saltQuantity = Quantities.getQuantity(25, TABLESPOON);
         ingredients.add(new Ingredient<Volume>(10,
                 "Salt",
                 "The saltiest of them all!",
@@ -49,7 +49,7 @@ public class IngredientDB {
                 R.drawable.salt,
                 "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
 
-        Quantity<Volume> butterQuantity = Quantities.getQuantity(1, CUP);
+        Quantity<Volume> butterQuantity = Quantities.getQuantity(2, CUP);
         ingredients.add(new Ingredient<Volume>(1,
                 "Butter",
                 "The finest butter ever!",
@@ -57,7 +57,7 @@ public class IngredientDB {
                 R.drawable.butter,
                 "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n"));
 
-        Quantity<Volume> sugarQuantity = Quantities.getQuantity(2, CUP);
+        Quantity<Volume> sugarQuantity = Quantities.getQuantity(1, CUP);
         ingredients.add(new Ingredient<Volume>(1,
                 "Sugar",
                 "The sweetest of them all!",
@@ -102,6 +102,7 @@ public class IngredientDB {
     public static List<Pair<Unit<?>, String>> getVolumeUnits() {
         List<Pair<Unit<?>,String>> out = new ArrayList<>();
         out.add(new Pair<>(Units.LITRE, "L"));
+        out.add(new Pair<>(CUP, "cup"));
         out.add(new Pair<>(FLUID_OUNCE, "fl oz"));
         out.add(new Pair<>(TABLESPOON, "Tbsp"));
         out.add(new Pair<>(PINT, "pt"));

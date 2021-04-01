@@ -22,10 +22,12 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Volume;
 
+import tech.units.indriya.quantity.Quantities;
 import tech.units.indriya.unit.Units;
 
 public class EditIngredientFragment extends DialogFragment {
@@ -70,7 +72,8 @@ public class EditIngredientFragment extends DialogFragment {
                 .setPositiveButton(R.string.edit_ingredient_dialog_confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        EditIngredientFragment.this.getDialog().cancel();
+                        ingredient.setQuantity((Quantity<?>)Quantities.getQuantity(np.getValue(), units.get(sp.getSelectedItemPosition())));
+                        EditIngredientFragment.this.getDialog().dismiss();
                     }
                 })
                 .setNegativeButton(R.string.edit_ingredient_dialog_cancel, new DialogInterface.OnClickListener() {

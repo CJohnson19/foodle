@@ -44,7 +44,7 @@ public class RecipeDB {
                 R.drawable.butter,
                 "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\nLOrem Ipsum Lorem Imputs \n"));
 
-        Quantity<Volume> sugarQuantity = Quantities.getQuantity(2, CUP);
+        Quantity<Volume> sugarQuantity = Quantities.getQuantity(1, CUP);
         tacoIngredients.add(new Ingredient<Volume>(1,
                 "Sugar",
                 "The sweetest of them all!",
