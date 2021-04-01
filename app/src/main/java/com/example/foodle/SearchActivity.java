@@ -130,8 +130,6 @@ public class SearchActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchActivity.this, MainActivity.class);
                 intent.putExtra(SearchActivity.PANTRY, viewModel.getPantry().getValue());
                 setResult(RESULT_OK, intent);
-                searchView.setQuery("", false);
-                searchView.clearFocus();
                 finish();
             }
         });
