@@ -1,18 +1,12 @@
 package com.example.foodle.model;
 
-import android.widget.Button;
-
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.measure.IncommensurableException;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
-import systems.uom.common.USCustomary;
 import tech.units.indriya.format.SimpleQuantityFormat;
-import tech.units.indriya.format.SimpleUnitFormat;
-import tech.units.indriya.quantity.Quantities;
 
 
 public class Ingredient<T extends Quantity<T>> implements Filterable, Serializable {
@@ -70,24 +64,24 @@ public class Ingredient<T extends Quantity<T>> implements Filterable, Serializab
         return quantity.to(unit);
     }
 
-    public void setQuantity(Quantity<T> quantity) {
-        this.quantity = quantity;
+    public void setQuantity(Quantity<?> quantity) {
+        this.quantity = (Quantity<T>) quantity;
     }
 
     public void addQuantity(Quantity<T> quantity) {
         this.quantity = this.quantity.add(quantity);
     }
 
-    public void subtractQuantity(Quantity<T> quantity) {
-        this.quantity = this.quantity.subtract(quantity);
+    public void subtractQuantity(Quantity<?> quantity) {
+        this.quantity = this.quantity.subtract((Quantity<T>) quantity);
     }
 
     public boolean hasNonZeroQuantity() {
-        return Math.abs(this.quantity.getValue().doubleValue() - .01) > 0;
+        return this.quantity.getValue().doubleValue() > 0;
     }
 
     public boolean hasMoreQuantityThan(Quantity<?> quantity) {
-        return (this.quantity.subtract((Quantity<T>) quantity).getValue().doubleValue()) >= 0;
+        return this.quantity.subtract((Quantity<T>)quantity).getValue().intValue() >= 0;
     }
 
     public String getQuantityString() {
