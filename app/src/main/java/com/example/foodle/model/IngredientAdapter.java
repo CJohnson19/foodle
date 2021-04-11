@@ -65,10 +65,11 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
         Ingredient<?> ingredient = ingredientList.get(position);
         holder.textViewTitle.setText(ingredient.getTitle());
         holder.textViewShortDesc.setText(ingredient.getDescription());
+        holder.textViewQuantity.setText(String.valueOf(ingredient.getQuantity()));
         if(isAdd) {
+            holder.textViewQuantity.setVisibility(View.GONE);
             holder.actionButton.setImageResource(R.drawable.baseline_add_24);
         } else {
-            holder.textViewQuantity.setText(String.valueOf(ingredient.getQuantity()));
             holder.actionButton.setImageResource(R.drawable.baseline_edit_24);
         }
         holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(ingredient.getImage()));
