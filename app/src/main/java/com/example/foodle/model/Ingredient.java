@@ -1,6 +1,7 @@
 package com.example.foodle.model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 import javax.measure.Quantity;
@@ -119,8 +120,9 @@ public class Ingredient<T extends Quantity<T>> implements Filterable, Serializab
      * @return String with quantity truncated to 2 decimal points
      */
     public String getQuantityString() {
+        DecimalFormat df = new DecimalFormat("0.##");
         double amount = this.quantity.getValue().doubleValue();
-        return String.format("%.2f %s", amount, quantity.getUnit().toString());
+        return String.format("%s %s", df.format(amount), quantity.getUnit().toString());
     }
 
     /**
