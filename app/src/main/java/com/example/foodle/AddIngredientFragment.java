@@ -1,6 +1,9 @@
 package com.example.foodle;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodle.db.IngredientDB;
 import com.example.foodle.model.Ingredient;
 import com.example.foodle.model.IngredientAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +42,25 @@ public class AddIngredientFragment extends Fragment {
         IngredientAdapter ingredientAdapter = new IngredientAdapter(getContext(), ingredientList, getChildFragmentManager());
         recyclerView.setAdapter(ingredientAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        final FloatingActionButton camera = root.findViewById(R.id.btn_camera);
+
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchTakePictureIntent();
+            }
+        });
         return root;
     }
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
-    /**
-     * To Use Later
-     * @param someFragment
-     */
-    public void replaceFragment(Fragment someFragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, someFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } catch (ActivityNotFoundException e) {
+            System.out.println(e.toString());
+            // display error state to the user
+        }
     }
 }

@@ -22,7 +22,6 @@ import com.example.foodle.db.IngredientDB;
 import com.example.foodle.model.FilterCategory;
 import com.example.foodle.model.Pantry;
 import com.example.foodle.model.PantryViewModel;
-import com.example.foodle.ui.AddMethodFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -122,14 +121,9 @@ public class MainActivity extends AppCompatActivity {
                             category = FilterCategory.RECIPES;
                             have = true;
                             break;
-                        case R.id.nav_search:
-                            selectedFrag = new SearchFragment();
-                            category = FilterCategory.RECIPES;
-                            have = false;
-                            break;
                         case R.id.nav_add:
                             //dispatchTakePictureIntent();
-                            selectedFrag = new AddMethodFragment();
+                            selectedFrag = new AddIngredientFragment();
                             break;
                         case R.id.nav_pantry:
                             selectedFrag = new PantryFragment();

@@ -6,10 +6,6 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Cook Now" />
     <item
-        android:id="@+id/nav_search"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="Search" />
-    <item
         android:id="@+id/nav_add"
         android:icon="@drawable/ic_baseline_add_circle_24"
         android:title="Add ingredients" />
