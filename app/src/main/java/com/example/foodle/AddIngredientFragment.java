@@ -1,6 +1,9 @@
 package com.example.foodle;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodle.db.IngredientDB;
 import com.example.foodle.model.Ingredient;
 import com.example.foodle.model.IngredientAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.example.foodle.model.PantryViewModel;
 
 import java.util.ArrayList;
@@ -38,6 +42,14 @@ public class AddIngredientFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ingredientList = IngredientDB.getStandardIngredients();
+        final FloatingActionButton camera = root.findViewById(R.id.btn_camera);
+
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchTakePictureIntent();
+            }
+        });
         return root;
     }
 
@@ -49,15 +61,15 @@ public class AddIngredientFragment extends Fragment {
         recyclerView.setAdapter(ingredientAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
-    /**
-     * To Use Later
-     * @param someFragment
-     */
-    public void replaceFragment(Fragment someFragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, someFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } catch (ActivityNotFoundException e) {
+            System.out.println(e.toString());
+            // display error state to the user
+        }
     }
 }
