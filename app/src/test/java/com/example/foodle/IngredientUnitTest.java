@@ -98,7 +98,7 @@ public class IngredientUnitTest {
     public void IngredientRecognizesEmpty() {
         Quantity<Mass> testQuantity = Quantities.getQuantity(0, POUND);
         Ingredient<Mass> i = new Ingredient<Mass>(1, "Test", "Test", testQuantity, 1, "Test");
-        assert(i.hasNonZeroQuantity());
+        assertFalse(i.hasNonZeroQuantity());
     }
     @Test
     public void IngredientRecognizesComparisonSameUnit() {
