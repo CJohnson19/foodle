@@ -34,7 +34,7 @@ public class PantryFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_pantry, container, false);
 
         recyclerView = (RecyclerView) root.findViewById(R.id.pantryRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         ingredientList = IngredientDB.getStandardIngredients();
 
@@ -55,7 +55,7 @@ public class PantryFragment extends Fragment {
 
 
     public void updatePantry() {
-        IngredientAdapter ingredientAdapter = new IngredientAdapter(getContext(), ingredientList, getChildFragmentManager());
+        IngredientAdapter ingredientAdapter = new IngredientAdapter(this.getContext(), ingredientList, getChildFragmentManager(),viewModel, false);
         recyclerView.setAdapter(ingredientAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }

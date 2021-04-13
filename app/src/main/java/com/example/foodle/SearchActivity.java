@@ -130,8 +130,6 @@ public class SearchActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchActivity.this, MainActivity.class);
                 intent.putExtra(SearchActivity.PANTRY, viewModel.getPantry().getValue());
                 setResult(RESULT_OK, intent);
-                searchView.setQuery("", false);
-                searchView.clearFocus();
                 finish();
             }
         });
@@ -196,7 +194,7 @@ public class SearchActivity extends AppCompatActivity {
             List<Ingredient<?>> ingredients_sort = ingredients.stream()
                     .filter(filters)
                     .collect(Collectors.toList());
-            IngredientAdapter ingredientAdapter = new IngredientAdapter(this, ingredients_sort, getSupportFragmentManager());
+            IngredientAdapter ingredientAdapter = new IngredientAdapter(this, ingredients_sort, getSupportFragmentManager(), viewModel, true);
 
             recyclerView.setAdapter(ingredientAdapter);
         }
