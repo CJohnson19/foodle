@@ -67,6 +67,24 @@ public class IngredientUnitTest {
         assertEquals("1 lb",i.getQuantityString());
     }
     @Test
+    public void IngredientReturnsQuantityStringWithOneDecimal() {
+        Quantity<Mass> testQuantity = Quantities.getQuantity(1.1, POUND);
+        Ingredient<Mass> i = new Ingredient<Mass>(1, "Test", "Test", testQuantity, 1, "Test");
+        assertEquals("1.1 lb",i.getQuantityString());
+    }
+    @Test
+    public void IngredientReturnsQuantityStringWithTwoDecimals() {
+        Quantity<Mass> testQuantity = Quantities.getQuantity(1.11, POUND);
+        Ingredient<Mass> i = new Ingredient<Mass>(1, "Test", "Test", testQuantity, 1, "Test");
+        assertEquals("1.11 lb",i.getQuantityString());
+    }
+    @Test
+    public void IngredientReturnsQuantityStringWithTruncatesMoreThanTwoDecimals() {
+        Quantity<Mass> testQuantity = Quantities.getQuantity(1.111, POUND);
+        Ingredient<Mass> i = new Ingredient<Mass>(1, "Test", "Test", testQuantity, 1, "Test");
+        assertEquals("1.11 lb",i.getQuantityString());
+    }
+    @Test
     public void IngredientAddsQuantitySameUnit() {
         Quantity<Mass> testQuantity = Quantities.getQuantity(10, POUND);
         Ingredient<Mass> i = new Ingredient<Mass>(1, "Test", "Test", testQuantity, 1, "Test");

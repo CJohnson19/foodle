@@ -10,6 +10,8 @@
     <string name="edit_ingredient_dialog_title">Edit Ingredient</string>
     <string name="edit_ingredient_dialog_confirm">Set</string>
     <string name="edit_ingredient_dialog_cancel">Cancel</string>
+    <string name="add_ingredient_dialog_confirm">Add</string>
+    <string name="add_ingredient_dialog_cancel">Cancel</string>
     <string-array name="volume_array">
         <item>Liters</item>
         <item>Fluid Ounces</item>

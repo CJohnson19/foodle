@@ -1,20 +1,24 @@
 package com.example.foodle.model;
 
 import android.content.Context;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodle.R;
-import com.example.foodle.ui.EditIngredientFragment;
+import com.example.foodle.ui.EditIngredientDialogFragment;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -27,13 +31,17 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     private Context mCtx;
     private FragmentManager fragmentManager;
     private List<Ingredient<?>> ingredientList;
+    private PantryViewModel pantryViewModel;
+    private boolean isAdd;
     int mExpandedPosition = -1;
 
 
-    public IngredientAdapter(Context mCtx, List<Ingredient<?>> ingredientList, FragmentManager fragmentManager) {
+    public IngredientAdapter(Context mCtx, List<Ingredient<?>> ingredientList, FragmentManager fragmentManager, PantryViewModel pantryViewModel, boolean isAdd) {
         this.mCtx = mCtx;
         this.ingredientList = ingredientList;
         this.fragmentManager = fragmentManager;
+        this.pantryViewModel = pantryViewModel;
+        this.isAdd = isAdd;
     }
 
     /***
@@ -42,42 +50,44 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
      * getItemCount -> Implements for extending RecyclerView.Adapter
      */
 
+    @NotNull
     @Override
-    public IngredientViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public IngredientViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         //inflating and returning our view holder
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.layout_ingredients, null);
-        System.out.println("Opening View Holder");
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.layout_ingredients, parent, false);
         return new IngredientViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(IngredientViewHolder holder, int position) {
         //getting the product of the specified position
-        Ingredient ingredient = ingredientList.get(position);
+        Ingredient<?> ingredient = ingredientList.get(position);
         holder.textViewTitle.setText(ingredient.getTitle());
         holder.textViewShortDesc.setText(ingredient.getDescription());
-        holder.textViewDuration.setText(String.valueOf(ingredient.getQuantity()));
+        holder.textViewQuantity.setText(ingredient.getQuantityString());
+        if(isAdd) {
+            holder.textViewQuantity.setVisibility(View.GONE);
+            holder.actionButton.setImageResource(R.drawable.baseline_add_24);
+        } else {
+            holder.actionButton.setImageResource(R.drawable.baseline_edit_24);
+        }
         holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(ingredient.getImage()));
         final boolean isExpanded = position==mExpandedPosition;
         holder.details.setVisibility(isExpanded?View.VISIBLE:View.GONE);
-        holder.button.setVisibility(isExpanded?View.VISIBLE:View.GONE);
-        holder.editButton.setVisibility(isExpanded?View.VISIBLE:View.GONE);
-        holder.editButton.setOnClickListener(v -> {
-            DialogFragment editFragment = new EditIngredientFragment(ingredient);
+        holder.details.setText(ingredient.getDetails());
+        holder.actionButton.setOnClickListener(v -> {
+            DialogFragment editFragment = new EditIngredientDialogFragment(ingredient, pantryViewModel, isAdd);
             editFragment.show(fragmentManager, "edit");
         });
-        holder.details.setText(ingredient.getDetails());
-        holder.itemView.setActivated(isExpanded);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 mExpandedPosition = isExpanded ? -1:position;
                 notifyItemChanged(position);
+                //notifyDataSetChanged();
             }
         });
-        System.out.println("Displaying view Card");
     }
 
     @Override
@@ -90,21 +100,20 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
      */
     class IngredientViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitle, textViewShortDesc, textViewDuration;
+        TextView textViewTitle, textViewShortDesc, textViewQuantity;
         ImageView imageView;
         TextView details;
-        Button button, editButton;
+        ImageButton actionButton;
 
         public IngredientViewHolder(View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewShortDesc = itemView.findViewById(R.id.textViewDescription);
-            textViewDuration = itemView.findViewById(R.id.textViewDuration);
+            textViewQuantity = itemView.findViewById(R.id.textViewQuantity);
             imageView = itemView.findViewById(R.id.imageView);
             details = itemView.findViewById(R.id.textDetails);
-            button = itemView.findViewById(R.id.button2);
-            editButton = itemView.findViewById(R.id.editButton);
+            actionButton = itemView.findViewById(R.id.actionButton);
         }
     }
 }

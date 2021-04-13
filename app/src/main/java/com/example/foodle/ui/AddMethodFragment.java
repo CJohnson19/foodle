@@ -13,9 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.foodle.AddIngredientFragment;
 import com.example.foodle.R;
+import com.example.foodle.model.PantryViewModel;
 
 public class AddMethodFragment extends Fragment {
     @Nullable
@@ -30,7 +32,6 @@ public class AddMethodFragment extends Fragment {
             public void onClick(View v) {
                 dispatchTakePictureIntent();
                 replaceFragment(new AddIngredientFragment());
-
             }
         });
         manual.setOnClickListener(new View.OnClickListener() {

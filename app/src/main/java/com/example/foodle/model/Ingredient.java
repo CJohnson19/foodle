@@ -1,6 +1,7 @@
 package com.example.foodle.model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 import javax.measure.Quantity;
@@ -68,28 +69,69 @@ public class Ingredient<T extends Quantity<T>> implements Filterable, Serializab
         this.quantity = (Quantity<T>) quantity;
     }
 
-    public void addQuantity(Quantity<T> quantity) {
-        this.quantity = this.quantity.add(quantity);
+    /**
+     * Sets current quantity to itself plus `quantity`.
+     * @param quantity Quantity to add to this
+     */
+    public void addQuantity(Quantity<?> quantity) {
+        this.quantity = this.quantity.add((Quantity<T>) quantity);
     }
 
+    /**
+     * Sets current quantity to itself minus `quantity`.
+     * If parameter `quantity` is greater than current quantity, clamps to 0.
+     * @param quantity Quantity to subtract from this
+     */
     public void subtractQuantity(Quantity<?> quantity) {
         this.quantity = this.quantity.subtract((Quantity<T>) quantity);
+        if(this.quantity.getValue().doubleValue() < 0) {
+            this.quantity = this.quantity.add(this.quantity.negate());
+        }
     }
 
+    /**
+     * Returns true if there is at least some amount of ingredient
+     * @return boolean representing greater than 0 relationship
+     */
     public boolean hasNonZeroQuantity() {
         return this.quantity.getValue().doubleValue() > 0;
     }
 
+    /**
+     * Returns true if `this` has equal or greater quantity than `quantity`.
+     * @param quantity Quantity to compare to `this`
+     * @return boolean representing greater than or equal relationship
+     */
     public boolean hasMoreQuantityThan(Quantity<?> quantity) {
         return this.quantity.subtract((Quantity<T>)quantity).getValue().intValue() >= 0;
     }
 
-    public String getQuantityString() {
-        return this.quantity.toString();
+    /**
+     * Returns true if `this` has equal or greater quantity than `ingredient`'s quantity
+     * @param ingredient ingredient's quantity to compare to `this`
+     * @return boolean representing greater than or equal relationship
+     */
+    public boolean hasMoreQuantityThan(Ingredient<?> ingredient) {
+        return hasMoreQuantityThan(ingredient.getQuantity());
     }
 
+    /**
+     * Gets formatted string for an ingredient's quantity
+     * @return String with quantity truncated to 2 decimal points
+     */
+    public String getQuantityString() {
+        DecimalFormat df = new DecimalFormat("0.##");
+        double amount = this.quantity.getValue().doubleValue();
+        return String.format("%s %s", df.format(amount), quantity.getUnit().toString());
+    }
+
+    /**
+     * Gets formatted string for an ingredient's quantity with unit `unit`
+     * @return String with quantity truncated to 2 decimal points after converting to `unit`
+     */
     public String getQuantityStringWithUnit(Unit<T> unit) {
-        return this.quantity.to(unit).toString();
+        double amount = this.quantity.to(unit).getValue().doubleValue();
+        return String.format("%.2f %s", amount, unit.toString());
     }
 
     public int getImage() {
