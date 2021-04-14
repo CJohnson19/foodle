@@ -58,7 +58,7 @@ public class RecipeDB {
                 "One of the best authentic mexican recipes out there!",
                 tacoCookTime,
                 R.drawable.tacos,
-                "Ingredients: \n Salt - 15 units\n Butter - 10 units \n Sugar - 10 units\n Recipe: \nCook butter for 10 minutes \n Add Salt to the pan\n Add Sugar to the pan \n Add Sugar to the pan\nAdd Sugar to the pan  \n Heat the mixture for 15 minutes \n Bake the mixture for 10 minutes\n  Rest in room temperature for 5 minutes \n Add pizza sauce \n Add sugar \n Add basil \n Add Cheese of your choide ",
+                "Ingredients: \n Salt - 15 units\n Butter - 10 units \n Sugar - 10 units\n Recipe: \nCook butter for 10 minutes \n Add Salt to the pan\n Add Sugar to the pan \n Add Sugar to the pan\nAdd Sugar to the pan  \n Heat the mixture for 15 minutes \n Bake the mixture for 10 minutes\n  Rest in room temperature for 5 minutes \n Add pizza sauce \n Add sugar \n Add basil \n Add Cheese of your choice ",
                 tacoIngredients));
 
         CompoundQuantity<Time> pizzaCookTime = CompoundQuantity.of(Quantities.getQuantity(45, MINUTE));
@@ -67,15 +67,25 @@ public class RecipeDB {
                 "Top Chef approved mouthwatering recipe",
                 pizzaCookTime,
                 R.drawable.pizza,
-                "Ingredients: \n Salt - 15 units\n Butter - 10 units \n Sugar - 10 units\n Recipe: \nCook butter for 10 minutes \n Add Salt to the pan \n Add Sugar to the pan \n Add Sugar to the pan\nAdd Sugar to the pan  \n Heat the mixture for 15 minutes \n Bake the mixture for 10 minutes\n  Rest in room temperature for 5 minutes \n Add pizza sauce \n Add sugar \n Add basil \n Add Cheese of your choide ",
+                "Ingredients: \n Salt - 15 units\n Butter - 10 units \n Sugar - 10 units\n Recipe: \nCook butter for 10 minutes \n Add Salt to the pan \n Add Sugar to the pan \n Add Sugar to the pan\nAdd Sugar to the pan  \n Heat the mixture for 15 minutes \n Bake the mixture for 10 minutes\n  Rest in room temperature for 5 minutes \n Add pizza sauce \n Add sugar \n Add basil \n Add Cheese of your choice ",
                 tacoIngredients));
+
         recipeList.add(new Recipe(1,
-                "New York Neapolitan Pizza",
-                "Top Chef approved mouthwatering recipe",
+                "One Pot Garlic Parmesan Pasta",
+                "The easiest and creamiest pasta made in a single pot",
                 pizzaCookTime,
-                R.drawable.pizza,
-                "Ingredients: \n Salt - 15 units\n Butter - 10 units \n Sugar - 10 units\n Recipe: \nCook butter for 10 minutes \n Add Salt to the pan\n Add Sugar to the pan \n Add Sugar to the pan\nAdd Sugar to the pan  \n Heat the mixture for 15 minutes \n Bake the mixture for 10 minutes\n  Rest in room temperature for 5 minutes \n Add pizza sauce \n Add sugar \n Add basil \n Add Cheese of your choide ",
+                R.drawable.pasta,
+                "Ingredients: \n Salt - 15 units\n Butter - 10 units \n Sugar - 10 units\n Recipe: \nCook butter for 10 minutes \n Add Salt to the pan\n Add Sugar to the pan \n Add Sugar to the pan\nAdd Sugar to the pan  \n Heat the mixture for 15 minutes \n Bake the mixture for 10 minutes\n  Rest in room temperature for 5 minutes \n Add pizza sauce \n Add sugar \n Add basil \n Add Cheese of your choice ",
                 tacoIngredients));
+
+        recipeList.add(new Recipe(1,
+                "Paneer Butter Masala",
+                "Paneer Butter Masala is one of India’s most popular paneer gravy recipe",
+                tacoCookTime,
+                R.drawable.paneer,
+                "Ingredients: \n Salt - 15 units\n Butter - 10 units \n Sugar - 10 units\n Recipe: \nCook butter for 10 minutes \n Add Salt to the pan\n Add Sugar to the pan \n Add Sugar to the pan\nAdd Sugar to the pan  \n Heat the mixture for 15 minutes \n Bake the mixture for 10 minutes\n  Rest in room temperature for 5 minutes \n Add pizza sauce \n Add sugar \n Add basil \n Add Cheese of your choice ",
+                tacoIngredients));
+
         return recipeList;
     }
 }
