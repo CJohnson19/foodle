@@ -87,6 +87,13 @@ public class IngredientDB {
                 cheeseAmount,
                 R.drawable.cheese,
                 "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
+        Quantity<Mass> chickenAmount = Quantities.getQuantity(2, POUND);
+        ingredients.add(new Ingredient<Mass>(1,
+                "Chicken",
+                "Chicken breasts, legs, etc.",
+                cheeseAmount,
+                R.drawable.chicken,
+                "LOrem Ipsum Lorem Imputs \n sdflsdfj sdkfjsdfj sdlkfj\n"));
 
         return ingredients;
     }
